@@ -5,26 +5,43 @@ import random
 
 # Variables
 player_health = 50
-
+BOLD = '\033[1m'
+ITALIC = '\033[3m'
+BLACK = "\033[0;30m"
+RED = "\033[0;31m"
+GREEN = "\033[0;32m"
+BROWN = "\033[0;33m"
+BLUE = "\033[0;34m"
+PURPLE = "\033[0;35m"
+CYAN = "\033[0;36m"
+LIGHT_GRAY = "\033[0;37m"
+DARK_GRAY = "\033[1;30m"
+LIGHT_RED = "\033[1;31m"
+LIGHT_GREEN = "\033[1;32m"
+YELLOW = "\033[1;33m"
+LIGHT_BLUE = "\033[1;34m"
+LIGHT_PURPLE = "\033[1;35m"
+LIGHT_CYAN = "\033[1;36m"
+LIGHT_WHITE = "\033[1;37m"
+UNDERLINE = "\033[4m"
+RESET = '\033[0m'
 
 # functions
 
-def attack_with_sword():
-    # Reduces the ghost's health by 5 when attacking with a sword
-    global ghost_health
-    ghost_health -= 5
-    time.sleep(0.5)  # Adds a 1-second delay before the next sentence.
-    print("You strike the ghost with your sword, dealing 5 points of damage.")
-    time.sleep(1)  # Adds a 1-second delay before the next sentence.
+
+def print_with_delay(text):
+    for character in text:
+        print(character, end='', flush=True)
+        time.sleep(0.01)
+    print()
 
 
-def attack_with_gun():
-    # Reduces the ghost's health by 10 when attacking with a gun
+def attack_with_weapon(weapon, damage):
     global ghost_health
-    ghost_health -= 10
-    time.sleep(0.5)  # Adds a 0.51-second delay before the next sentence.
-    print("You unleash a powerful shot from your gun, dealing 10 points of damage.")
-    time.sleep(1)  # Adds a 1-second delay before the next sentence.
+    ghost_health -= damage
+    time.sleep(0.1)
+    print_with_delay("{}, dealing {} points of damage.".format(weapon, damage))
+    time.sleep(1)
 
 
 def heal_player():
@@ -32,236 +49,292 @@ def heal_player():
     global player_health
     health_package = random.randint(1, 30)
     player_health += health_package
-    print("You find a health package in the treasure chest and gain {} health points.".format(
-        health_package))
+    print_with_delay(
+        "You find a health package in the treasure chest and gain {} health points.".format(health_package))
 
 
 # Text image (if needed)
 
 # Intro (Adeola)------------------------------------------------------------------------------------------
-print("...................Welcome to Enclosed space................")
-print("...................Welcome to Enclosed space................")
-print("...................Welcome to Enclosed space................")
-print("...................Welcome to Enclosed space................")
-print("      ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⣀⡀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⣾⣿⣀⡀⠀⢀⠀⠀⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠙⠛⠋⠀⣼⣿⣀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⢀⣴⣾⠀⣠⠀⠀⡀⠘⠛⠋⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⣿⣿⡿⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣧⣾⡇⣠⡄⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠋⠸⡿⠛⣿⣿⣿⣿⣧⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⣿⣿⣿⡷⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠋⠀⡿⠋⠁⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⣶⣶⣶⣶⠞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⢀⣠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⠋⢁⣀⣀⣀⣤⣴⣶⣿⡇⠀⠀⠀⠀⣀⣴⡇⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⢀⣠⣴⣾⣿⣿⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("      ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣿⣿⣿⣿⣿⣿⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿")
-print("You are in bedroom injured, you need medical supply")
-print("Type Health to check you health or type GET UP to leave the bed")
+print_with_delay(BOLD + LIGHT_RED +
+                 "...................Welcome to Enclosed space................" + RESET)
+print_with_delay(
+    BOLD + YELLOW + "...................Welcome to Enclosed space................" + RESET)
+print_with_delay(BOLD + LIGHT_BLUE +
+                 "...................Welcome to Enclosed space................" + RESET)
+print_with_delay(
+    BOLD + GREEN + "...................Welcome to Enclosed space................" + RESET)
+print_with_delay(
+    BOLD + RED + "...................Welcome to Enclosed space................" + RESET)
+print("")
+print_with_delay("       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀")
+print_with_delay("       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣆⠀⠀")
+print_with_delay("      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⠁⠀⠿⢿⣿⡿⣿⣿⡆⠀")
+print_with_delay("      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦⣤⣴⣿⠃⠀⠿⣿⡇⠀")
+print_with_delay("      ⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⡿⠋⠁⣿⠟⣿⣿⢿⣧⣤⣴⣿⡇⠀")
+print_with_delay("      ⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠘⠁⢸⠟⢻⣿⡿⠀⠀")
+print_with_delay("      ⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣇⢀⣤⠀⠀⠀⠀⠘⣿⠃⠀⠀")
+print_with_delay("      ⠀⠀⠀⠀⠀⢈⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣿⢀⣴⣾⠇⠀⠀⠀")
+print_with_delay("      ⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀")
+print_with_delay("      ⠀⠀⠉⠉⠉⠉⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀")
+print_with_delay("      ⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀")
+print_with_delay("      ⠀⠀⣴⡾⠿⠿⠿⠛⠋⠉⠀⢸⣿⣿⣿⣿⠿⠋⢸⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀")
+print_with_delay("      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠟⠋⠁⠀⠀⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")
+
+print("")
+
+
+player_name = input("what is your name " + GREEN + ":> " + RESET)
+print_with_delay(LIGHT_CYAN + BOLD + "{}".format(player_name) +
+                 RESET + ",Welcome to Enclosed space!")
 
 
 # Stats (Adeola)------------------------------------------------------------------------------------------
 
 # wake up instructions
 
-first_input = (input("> "))
-if first_input == "health":
-    print("your health is {}".format(player_health))
-else:
-    print("wrong answer")
+input("Press enter to wake up" + GREEN + ":> " + RESET)
+print_with_delay(
+    "You wake up in a dimly lit bedroom, disoriented and with no memory of the day before.")
+print_with_delay(
+    "As you try to collect your thoughts, you hear eerie noises echoing through the house.")
+print_with_delay(
+    "A sudden realization hits you - you are injured and in need of medical supplies.")
+print_with_delay(
+    "Determined to uncover the truth, you must find a way out of this haunting nightmare.")
 
-second_input = (input("> "))
-if second_input == "get up":
-    print("leave the bed,look around for clue")
 
-print("You find a key and a note on the ground")
+input("Press enter to get up" + GREEN + ":> " + RESET)
+print_with_delay(LIGHT_CYAN + BOLD + "{}".format(player_name) +
+                 RESET + ",you need to find out about your health.")
+input("Press enter to see your health stats" + GREEN + ":> " + RESET)
+print_with_delay("Your health is" + GREEN + BOLD +
+                 " {} points.".format(player_health))
+print_with_delay(RESET + "You find a " + BOLD + RED + "RED KEY" +
+                 RESET + " and a " + BOLD + BROWN + "NOTE " + RESET + "on the ground.")
 
 # Inspect the note
 
-input("Press enter to read the note.> ")
-print("You are in a haunted house, you must find a way to escape")
+input("Press enter to read the note" + GREEN + ":> " + RESET)
+print_with_delay(UNDERLINE + ITALIC + YELLOW +
+                 "You are in a haunted house, you must find a way to escape" + RESET)
 # inspect the key
-input("Press enter to inspect the key.> ")
-print("The key has a red label on it which says Kitchen")
+input("Press enter to inspect the key" + GREEN + ":> " + RESET)
+print_with_delay(UNDERLINE + "The " + BOLD + RED + UNDERLINE +
+                 "key" + RESET + UNDERLINE + " opens the kitchen door" + RESET)
 
-print("You leave the bedroom and enter to the corridor")
-print("You can see there are 3 doors")
+print_with_delay("You leave the bedroom and enter to the corridor")
+print_with_delay("You can see there are 3 doors")
 
 # Corridor0 (Zamir)----------------------------------------------------------------------------------------
 
-corridor_choice = input("Choose door one, door two, or door three:> ")
+corridor_choice = input("Choose " + RED + "RED, " + YELLOW +
+                        "YELLOW " + "or " + BLUE + "BLUE door" + GREEN + " :> " + RESET)
 
-while corridor_choice != "door one":
-    if corridor_choice == "door two" or corridor_choice == "door three":
-        print("This door is locked")
-        corridor_choice = input("Please choose another door:> ")
+while corridor_choice.lower() != "red":
+    if corridor_choice.lower() == "yellow" or corridor_choice.lower() == "blue":
+        print_with_delay(PURPLE + "This door is locked" + RESET)
+        corridor_choice = input(
+            "Please choose another door" + GREEN + " :> " + RESET)
     else:
-        print("Choose wisely")
-        corridor_choice = input("Choose door one, door two, or door three:> ")
+        print_with_delay(BLACK + BOLD + "Choose wisely" + RESET)
+        corridor_choice = input("Choose " + RED + "red, " + YELLOW +
+                                "yellow " + BLUE + "or blue door" + GREEN + " :> " + RESET)
 
-print("The kitchen door is open and you can enter")
-print("You enter the kitchen")
+print_with_delay(LIGHT_GREEN + "You use " + RED + "red key" + LIGHT_GREEN +
+                 " to unlock the Kitchen door and enter the room." + RESET)
 
 
 # Kitchen (Brad) --------------------------------------------------------------------------------------------
 
 ghost_health = 15
 
-print("You see a very creepy ghost, it threatens you and you must kill it")
+print_with_delay("A" + LIGHT_WHITE + ITALIC + " ghost" +
+                 RESET + " is waiting for you inside.")
 
 # kitchen battle
 
-print("You see a sword and a gun on the table, you use them to attack the ghost")
+print_with_delay(
+    "You see a sword and a gun on the table, you use them to attack the ghost")
 
 while ghost_health > 0:
-    # Displays player's and ghost's health
-    print("Your health: {}".format(player_health))
-    print("Ghost's health: {}".format(ghost_health))
-    print("Choose your action:")
-    print("1. Attack with a sword")
-    print("2. Attack with a gun")
+    print_with_delay(GREEN + BOLD + "Your health: {}".format(player_health))
+    print_with_delay(LIGHT_WHITE + "Ghost's health: {}".format(ghost_health))
+    print_with_delay(RESET + "Choose your action:")
+    print_with_delay(UNDERLINE + "1. Attack with a sword")
+    print_with_delay(UNDERLINE + "2. Attack with a gun")
 
-    choice = input("Enter your choice (1 or 2):> ")
-
+    choice = input("Enter your choice (1 or 2)" + GREEN + " :> " + RESET)
     if choice == "1":
-        attack_with_sword()  # Executes the attack_with_sword() function
+        attack_with_weapon(
+            LIGHT_RED + "{} strike the ghost with your sword".format(player_name), 5)
     elif choice == "2":
-        attack_with_gun()  # Executes the attack_with_gun() function
+        attack_with_weapon(
+            LIGHT_RED + "{} unleash the gun on the ghost".format(player_name), 10)
     else:
-        print("Invalid choice. Please try again.")
-        continue
+        print_with_delay(LIGHT_GRAY + "Invalid choice. Please try again.")
 
     if ghost_health <= 0:
-        print("Congratulations! You have defeated the ghost.")
+        print_with_delay(
+            LIGHT_GREEN + "Congratulations! You have defeated the ghost.")
+        print_with_delay("You see a treasure chest")
+        print_with_delay("You find a " + YELLOW + BOLD +
+                         "YELLOW KEY " + LIGHT_GREEN + "and a health source" + RESET)
         heal_player()  # Executes the heal_player() function
-print("You find a health source and your health is increased to", player_health)
-print("You have successfully vanquished the ghost and restored your health.")
-print("You decide to leave the kitchen and continue your exploration.")
-print("You make your way back to the corridor, ready to face whatever awaits you in your quest.")
+print_with_delay(
+    LIGHT_PURPLE + "You find a health source and your health is increased to {}".format(player_health))
+print_with_delay(
+    "You have successfully vanquished the ghost and restored your health.")
+print_with_delay(
+    "You decide to leave the kitchen and continue your exploration.")
+print_with_delay(
+    "You make your way back to the corridor, ready to face whatever awaits you in your quest." + RESET)
 
-#Corridor1 (Zamir)----------------------------------------------------------------------------------------
+# Corridor1 (Zamir)----------------------------------------------------------------------------------------
 
-corridor_choice = input("Choose door one, door two, or door three:> ")
+corridor_choice = input("Choose " + RED + "RED, " + YELLOW +
+                        "YELLOW " + BLUE + "or BLUE door" + GREEN + " :> " + RESET)
 
-while corridor_choice != "door two":
-    if corridor_choice == "door one":
-        print("This room is empty, you already have been here")
-        corridor_choice = input("Please choose another door:> ")
-    elif corridor_choice == "door three":
-        print("The door is locked")
-        corridor_choice = input("Please choose another door:> ")
+while corridor_choice.lower() != "yellow":
+    if corridor_choice.lower() == "red":
+        print_with_delay(
+            DARK_GRAY + "This room is empty, you already have been here" + RESET)
+        corridor_choice = input(
+            "Please choose another door" + GREEN + " :> " + RESET)
+    elif corridor_choice.lower() == "blue":
+        print_with_delay(PURPLE + "The door is locked" + RESET)
+        corridor_choice = input(
+            "Please choose another door" + GREEN + " :> " + RESET)
     else:
-        print("Choose wisely")
-        corridor_choice = input("Choose door one, door two, or door three:> ")
-
-print("The living room door is open and you can enter")
-print("You enter the living room")
+        print_with_delay(BLACK + BOLD + "Choose wisely" + RESET)
+        corridor_choice = input("Choose " + RED + "RED, " + YELLOW +
+                                "YELLOW " + BLUE + "or BLUE door" + GREEN + " :> " + RESET)
 
 
 # Living room (Maz) --------------------------------------------------------------------------------------------
 
 ghost_health = 25
 
-print("You see another creepy ghost, it threatens you and you must kill it")
+print_with_delay(LIGHT_GREEN + "You use the " + YELLOW + "yellow key " +
+                 LIGHT_GREEN + "to unlock the Living room door and enter the room.")
+print_with_delay("Another " + LIGHT_WHITE + ITALIC + "ghost" +
+                 LIGHT_GREEN + " awaits you, stronger than before." + RESET)
 
 
-#Living room battle
+# Living room battle
 
-print("You see a sword and a gun on the table, you use them to attack the ghost")
+print_with_delay(
+    "You see a sword and a gun on the table, you use them to attack the ghost")
 
 while ghost_health > 0:
-    # Displays player's and ghost's health
-    print("Your health: {}".format(player_health))
-    print("Ghost's health: {}".format(ghost_health))
-    print("Choose your action:")
-    print("1. Attack with a sword")
-    print("2. Attack with a gun")
+    print_with_delay(GREEN + "Your health: {}".format(player_health))
+    print_with_delay(LIGHT_WHITE + "Ghost's health: {}".format(ghost_health))
+    print_with_delay(RESET + "Choose your action:")
+    print_with_delay("1. Attack with a sword")
+    print_with_delay("2. Attack with a gun")
 
-    choice = input("Enter your choice (1 or 2):> ")
-
+    choice = input("Enter your choice (1 or 2)" + GREEN + " :> " + RESET)
     if choice == "1":
-        attack_with_sword()  # Executes the attack_with_sword() function
+        attack_with_weapon(
+            LIGHT_RED + "{} strike the ghost with your sword".format(player_name), 5)
     elif choice == "2":
-        attack_with_gun()  # Executes the attack_with_gun() function
+        attack_with_weapon(
+            LIGHT_RED + "{} unleash the gun on the ghost".format(player_name), 10)
     else:
-        print("Invalid choice. Please try again.")
-        continue
+        print_with_delay(LIGHT_GRAY + "Invalid choice. Please try again.")
 
     if ghost_health <= 0:
-        print("Congratulations! You have defeated the ghost.")
+        print_with_delay(
+            LIGHT_GREEN + "Congratulations! You have defeated the ghost.")
+        print_with_delay("You see a treasure chest")
+        print_with_delay("You find a " + BLUE + BOLD + "BLUE KEY " +
+                         LIGHT_GREEN + "and a health source" + RESET)
         heal_player()  # Executes the heal_player() function
 print("You have {} health".format(player_health))
-print("You have successfully vanquished the ghost and restored your health.")
-print("You decide to leave the living room and continue your exploration.")
-print("You make your way back to the corridor, ready to face whatever awaits you in your quest.")
+print_with_delay(
+    LIGHT_PURPLE + "You have successfully vanquished the ghost and restored your health.")
+print_with_delay(
+    "You decide to leave the living room and continue your exploration.")
+print_with_delay(
+    "You make your way back to the corridor, ready to face whatever awaits you in your quest." + RESET)
 
 
+# Corridor2 (Zamir)----------------------------------------------------------------------------------------
 
-#Corridor2 (Zamir)----------------------------------------------------------------------------------------
+corridor_choice = input("Choose " + RED + "RED, " + YELLOW +
+                        "YELLOW " + BLUE + "or BLUE door" + GREEN + " :> " + RESET)
 
-corridor_choice = input("Choose door one, door two, or door three:> ")
-
-while corridor_choice != "door three":
-    if corridor_choice == "door one" or corridor_choice == "door two":
-        print("This room is empty, you already have been here")
-        corridor_choice = input("Please choose another door: ")
+while corridor_choice.lower() != "blue":
+    if corridor_choice.lower() == "red" or corridor_choice.lower() == "yellow":
+        print_with_delay(
+            DARK_GRAY + "This room is empty, you already have been here" + RESET)
+        corridor_choice = input(
+            "Please choose another door" + GREEN + " :> " + RESET)
     else:
-        print("Choose wisely")
-        corridor_choice = input("Choose door one, door two, or door three: ")
+        print_with_delay(BLACK + BOLD + "Choose wisely" + RESET)
+        corridor_choice = input("Choose " + RED + "RED, " + YELLOW +
+                                "YELLOW " + BLUE + "or BLUE door" + GREEN + " :> " + RESET)
 
-print("The bathroom door is open and you can enter")
-print("You enter the bathroom")
+print_with_delay("The bathroom door is open and you can enter")
+print_with_delay("You enter the bathroom")
 
 
 # Bathroom (Faz) --------------------------------------------------------------------------------------------
 
 ghost_health = 45
 
-print("You see another creepy ghost, it threatens you and you must kill it")
+print_with_delay("You use the " + BLUE + "blue key " + RESET +
+                 "to unlock the Bathroom door and enter the room.")
+print_with_delay("A stronger" + LIGHT_WHITE + ITALIC + "ghost" +
+                 RESET + "lurks inside with a formidable health pool of 50.")
 
-#Bathroom battle
+# Bathroom battle
 
-print("You see a sword and a gun on the table, you use them to attack the ghost")
+print_with_delay(
+    "You see a sword and a gun on the table, you use them to attack the ghost")
 
 while ghost_health > 0:
-    # Displays player's and ghost's health
-    print("Your health: {}".format(player_health))
-    print("Ghost's health: {}".format(ghost_health))
-    print("Choose your action:")
-    print("1. Attack with a sword")
-    print("2. Attack with a gun")
+    print_with_delay(GREEN + "Your health: {}".format(player_health))
+    print_with_delay(LIGHT_WHITE + "Ghost's health: {}".format(ghost_health))
+    print_with_delay(RESET + "Choose your action:")
+    print_with_delay("1. Attack with a sword")
+    print_with_delay("2. Attack with a gun")
 
-    choice = input("Enter your choice (1 or 2):> ")
-
+    choice = input("Enter your choice (1 or 2)" + GREEN + " :> " + RESET)
     if choice == "1":
-        attack_with_sword()  # Executes the attack_with_sword() function
+        attack_with_weapon(
+            LIGHT_RED + "{} strike the ghost with your sword".format(player_name), 5)
     elif choice == "2":
-        attack_with_gun()  # Executes the attack_with_gun() function
+        attack_with_weapon(
+            LIGHT_RED + "{} unleash the gun on the ghost".format(player_name), 10)
     else:
-        print("Invalid choice. Please try again.")
-        continue
+        print_with_delay(LIGHT_GRAY + "Invalid choice. Please try again.")
 
     if ghost_health <= 0:
-        print("Congratulations! You have defeated the ghost.")
-        heal_player()  # Executes the heal_player() function
-print("You have {} health".format(player_health))
-print("You have successfully vanquished the ghost and restored your health.")
-print("You decide to leave the bathroom and continue your exploration.")
-print("You make your way back to the corridor, ready to face whatever awaits you in your quest.")
+        print_with_delay(LIGHT_GREEN + ITALIC +
+                         "Congratulations! You have defeated the ghost.")
+        print_with_delay("You find a treasure chest")
+        print_with_delay("You open the treasure chest and there is a " +
+                         LIGHT_CYAN + BOLD + "FINAL KEY" + RESET)
+print_with_delay("You decide to leave the bathroom.")
+print_with_delay(
+    "You make your way back to the corridor, and a front door appears.")
 
 
-#Corridor3 (Zamir)----------------------------------------------------------------------------------------
+# Corridor3 (Zamir)----------------------------------------------------------------------------------------
 
-print("Congratulations! You possess all three keys.")
-print("The game prompts you to type 'open' to unlock the front door.")
-open_door = input("Type 'open':> ")
+print_with_delay(
+    "Congratulations! {}, you possess all keys.".format(player_name))
+print_with_delay(
+    "The game prompts you to type 'open' to unlock the front door.")
+open_door = input("Type 'OPEN'" + GREEN + " :> " + RESET)
 
 if open_door.lower() == "open":
-    print("You unlock the front door.")
-    print("You can now breathe a sigh of relief as the game comes to an end.")
-    print("Congratulations on your escape!")
+    print_with_delay(GREEN + BOLD + UNDERLINE + "You unlock the front door.")
+    print_with_delay(
+        "You can now breathe a sigh of relief as the game comes to an end.")
+    print_with_delay("Congratulations on your escape!")
 else:
-    print("You hesitate to open the door and remain trapped in the haunting house.")
-    print("Game Over! Your adventure ends here.")
+    print_with_delay(YELLOW + BOLD + UNDERLINE +
+                     "You hesitate to open the door and remain trapped in the haunting house.")
+    print_with_delay("Game Over! Your adventure ends here.")
