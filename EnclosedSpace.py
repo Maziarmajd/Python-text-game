@@ -3,8 +3,11 @@
 import time
 import random
 
-# Variables
-player_health = 50
+
+
+# Global Variables
+player_health = 100
+
 BOLD = '\033[1m'
 ITALIC = '\033[3m'
 BLACK = "\033[0;30m"
@@ -26,9 +29,9 @@ LIGHT_WHITE = "\033[1;37m"
 UNDERLINE = "\033[4m"
 RESET = '\033[0m'
 
-# functions
+# Global functions
 
-
+#
 def print_with_delay(text):
     for character in text:
         print(character, end='', flush=True)
@@ -38,11 +41,21 @@ def print_with_delay(text):
 
 def attack_with_weapon(weapon, damage):
     global ghost_health
+    global player_health
     ghost_health -= damage
+    if ghost_health > 0:
+        ghost_attack = random.randint(1, 20)
+        player_health -= ghost_attack
+    else:
+        ghost_attack = 0
     time.sleep(0.1)
     print_with_delay("{}, dealing {} points of damage.".format(weapon, damage))
-    time.sleep(1)
+    time.sleep(0.7)
+    print_with_delay(
+        "The ghost attacked you for {} points of damage.".format(ghost_attack))
+    time.sleep(0.7)
 
+# healing package
 
 def heal_player():
     # Restores player's health with a random value between 1 and 30
@@ -56,30 +69,31 @@ def heal_player():
 # Text image (if needed)
 
 # Intro (Adeola)------------------------------------------------------------------------------------------
-print_with_delay(BOLD + LIGHT_RED +
-                 "...................Welcome to Enclosed space................" + RESET)
-print_with_delay(
-    BOLD + YELLOW + "...................Welcome to Enclosed space................" + RESET)
-print_with_delay(BOLD + LIGHT_BLUE +
-                 "...................Welcome to Enclosed space................" + RESET)
-print_with_delay(
-    BOLD + GREEN + "...................Welcome to Enclosed space................" + RESET)
-print_with_delay(
-    BOLD + RED + "...................Welcome to Enclosed space................" + RESET)
-print("")
-print_with_delay("       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀")
-print_with_delay("       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣆⠀⠀")
-print_with_delay("      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⠁⠀⠿⢿⣿⡿⣿⣿⡆⠀")
-print_with_delay("      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦⣤⣴⣿⠃⠀⠿⣿⡇⠀")
-print_with_delay("      ⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⡿⠋⠁⣿⠟⣿⣿⢿⣧⣤⣴⣿⡇⠀")
-print_with_delay("      ⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠘⠁⢸⠟⢻⣿⡿⠀⠀")
-print_with_delay("      ⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣇⢀⣤⠀⠀⠀⠀⠘⣿⠃⠀⠀")
-print_with_delay("      ⠀⠀⠀⠀⠀⢈⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣿⢀⣴⣾⠇⠀⠀⠀")
-print_with_delay("      ⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀")
-print_with_delay("      ⠀⠀⠉⠉⠉⠉⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀")
-print_with_delay("      ⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀")
-print_with_delay("      ⠀⠀⣴⡾⠿⠿⠿⠛⠋⠉⠀⢸⣿⣿⣿⣿⠿⠋⢸⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀")
-print_with_delay("      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠟⠋⠁⠀⠀⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")
+print(RED + "▓█████  ███▄    █  ▄████▄   ██▓     ▒█████    ██████ ▓█████ ▓█████▄      ██████  ██▓███   ▄▄▄       ▄████▄  ▓█████") 
+print(RED + "▓█   ▀  ██ ▀█   █ ▒██▀ ▀█  ▓██▒    ▒██▒  ██▒▒██    ▒ ▓█   ▀ ▒██▀ ██▌   ▒██    ▒ ▓██░  ██▒▒████▄    ▒██▀ ▀█  ▓█   ▀") 
+print(RED + "▒███   ▓██  ▀█ ██▒▒▓█    ▄ ▒██░    ▒██░  ██▒░ ▓██▄   ▒███   ░██   █▌   ░ ▓██▄   ▓██░ ██▓▒▒██  ▀█▄  ▒▓█    ▄ ▒███")   
+print(RED + "▒▓█  ▄ ▓██▒  ▐▌██▒▒▓▓▄ ▄██▒▒██░    ▒██   ██░  ▒   ██▒▒▓█  ▄ ░▓█▄   ▌     ▒   ██▒▒██▄█▓▒ ▒░██▄▄▄▄██ ▒▓▓▄ ▄██▒▒▓█  ▄") 
+print(RED + "░▒████▒▒██░   ▓██░▒ ▓███▀ ░░██████▒░ ████▓▒░▒██████▒▒░▒████▒░▒████▓    ▒██████▒▒▒██▒ ░  ░ ▓█   ▓██▒▒ ▓███▀ ░░▒████▒")
+print(RED + "░░ ▒░ ░░ ▒░   ▒ ▒ ░ ░▒ ▒  ░░ ▒░▓  ░░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░░░ ▒░ ░ ▒▒▓  ▒    ▒ ▒▓▒ ▒ ░▒▓▒░ ░  ░ ▒▒   ▓▒█░░ ░▒ ▒  ░░░ ▒░ ░")
+print(RED + " ░ ░  ░░ ░░   ░ ▒░  ░  ▒   ░ ░ ▒  ░  ░ ▒ ▒░ ░ ░▒  ░ ░ ░ ░  ░ ░ ▒  ▒    ░ ░▒  ░ ░░▒ ░       ▒   ▒▒ ░  ░  ▒    ░ ░  ░")
+print(RED + "   ░      ░   ░ ░ ░          ░ ░   ░ ░ ░ ▒  ░  ░  ░     ░    ░ ░  ░    ░  ░  ░  ░░         ░   ▒   ░           ░   ")
+print(RED + "   ░  ░         ░ ░ ░          ░  ░    ░ ░        ░     ░  ░   ░             ░                 ░  ░░ ░         ░  ░")
+
+
+
+print("" + RESET)
+print_with_delay("       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀                  ")
+print_with_delay("       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣆⠀⠀                  ")
+print_with_delay("      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⠁⠀⠿⢿⣿⡿⣿⣿⡆                    ")
+print_with_delay("      ⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⡿⠋⠁⣿⠟⣿⣿⢿⣧⣤⣴⣿⡇⠀                   ")
+print_with_delay("      ⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠘⠁⢸⠟⢻⣿⡿⠀⠀                  ")
+print_with_delay("      ⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣇⢀⣤⠀⠀⠀⠀⠘⣿⠃⠀⠀                 ")
+print_with_delay("      ⠀⠀⠀⠀⠀⢈⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣿⢀⣴⣾⠇⠀⠀⠀                  ")
+print_with_delay("      ⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀                 ")
+print_with_delay("      ⠀⠀⠉⠉⠉⠉⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀                  ")
+print_with_delay("      ⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀                ")
+print_with_delay("      ⠀⠀⣴⡾⠿⠿⠿⠛⠋⠉⠀⢸⣿⣿⣿⣿⠿⠋⢸⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀               ")
+print_with_delay("      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠟⠋⠁⠀⠀⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀              ")
 
 print("")
 
@@ -95,7 +109,7 @@ print_with_delay(LIGHT_CYAN + BOLD + "{}".format(player_name) +
 
 input("Press enter to wake up" + GREEN + ":> " + RESET)
 print_with_delay(
-    "You wake up in a dimly lit bedroom, disoriented and with no memory of the day before.")
+    "You wake up in a dimly lit bedroom, disoriented and with no memory of the day be")
 print_with_delay(
     "As you try to collect your thoughts, you hear eerie noises echoing through the house.")
 print_with_delay(
@@ -152,6 +166,23 @@ ghost_health = 15
 print_with_delay("A" + LIGHT_WHITE + ITALIC + " ghost" +
                  RESET + " is waiting for you inside.")
 
+print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀")
+print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀")
+print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣆⠀⠀")
+print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⠁⠀⠿⢿⣿⡿⣿⣿⡆⠀")
+print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦⣤⣴⣿⠃⠀⠿⣿⡇⠀")
+print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⡿⠋⠁⣿⠟⣿⣿⢿⣧⣤⣴⣿⡇⠀")
+print(RED +"⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠘⠁⢸⠟⢻⣿⡿⠀⠀")
+print(RED +"⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣇⢀⣤⠀⠀⠀⠀⠘⣿⠃⠀⠀")
+print(RED +"⠀⠀⠀⠀⠀⢈⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣿⢀⣴⣾⠇⠀⠀⠀")
+print(RED +"⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀")
+print(RED +"⠀⠀⠉⠉⠉⠉⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀")
+print(RED +"⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀")
+print(RED +"⠀⠀⣴⡾⠿⠿⠿⠛⠋⠉⠀⢸⣿⣿⣿⣿⠿⠋⢸⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀")
+print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠟⠋⠁⠀⠀⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")
+print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" + RESET)
+
+
 # kitchen battle
 
 print_with_delay(
@@ -163,7 +194,7 @@ while ghost_health > 0:
     print_with_delay(RESET + "Choose your action:")
     print_with_delay(UNDERLINE + "1. Attack with a sword")
     print_with_delay(UNDERLINE + "2. Attack with a gun")
-
+    time.sleep(0.5)
     choice = input("Enter your choice (1 or 2)" + GREEN + " :> " + RESET)
     if choice == "1":
         attack_with_weapon(
@@ -174,6 +205,24 @@ while ghost_health > 0:
     else:
         print_with_delay(LIGHT_GRAY + "Invalid choice. Please try again.")
 
+    if player_health <= 0:
+        print_with_delay(
+            "The ghost overwhelms you, and you succumb to its haunting presence.")
+        print_with_delay(
+            "Game Over! You have to restart your adventure from the beginning.")
+        print("")
+        print_with_delay(RED +     "██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗") 
+        print_with_delay(RED +    "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗")
+        print_with_delay(RED +    "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝")
+        print_with_delay(RED +    "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗")
+        print_with_delay(RED +    "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║")
+        print_with_delay(RED +     "╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝")
+        print_with_delay(YELLOW +                          "CREATED BY: TEAM ONE")
+        print_with_delay(YELLOW +            "ADEOLA, BRADLEY, FAZAL, PAYIKENE, MAZIAR, ZAMIR")
+        print_with_delay(YELLOW +                              "THANK YOU" + RESET)    
+
+        exit()
+
     if ghost_health <= 0:
         print_with_delay(
             LIGHT_GREEN + "Congratulations! You have defeated the ghost.")
@@ -181,14 +230,10 @@ while ghost_health > 0:
         print_with_delay("You find a " + YELLOW + BOLD +
                          "YELLOW KEY " + LIGHT_GREEN + "and a health source" + RESET)
         heal_player()  # Executes the heal_player() function
-print_with_delay(
-    LIGHT_PURPLE + "You find a health source and your health is increased to {}".format(player_health))
-print_with_delay(
-    "You have successfully vanquished the ghost and restored your health.")
-print_with_delay(
-    "You decide to leave the kitchen and continue your exploration.")
-print_with_delay(
-    "You make your way back to the corridor, ready to face whatever awaits you in your quest." + RESET)
+        print_with_delay(LIGHT_PURPLE + "Your health is increased to {}".format(player_health))
+        print_with_delay("You have successfully vanquished the ghost and restored your health.")
+        print_with_delay("You decide to leave the kitchen and continue your exploration.")
+        print_with_delay("You make your way back to the corridor, ready to face whatever awaits you in your quest." + RESET)
 
 # Corridor1 (Zamir)----------------------------------------------------------------------------------------
 
@@ -218,7 +263,24 @@ ghost_health = 25
 print_with_delay(LIGHT_GREEN + "You use the " + YELLOW + "yellow key " +
                  LIGHT_GREEN + "to unlock the Living room door and enter the room.")
 print_with_delay("Another " + LIGHT_WHITE + ITALIC + "ghost" +
-                 LIGHT_GREEN + " awaits you, stronger than before." + RESET)
+                 LIGHT_GREEN + " awaits you, stronger than be" + RESET)
+
+print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀")
+print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀")
+print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣆⠀⠀")
+print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⠁⠀⠿⢿⣿⡿⣿⣿⡆⠀")
+print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦⣤⣴⣿⠃⠀⠿⣿⡇⠀")
+print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⡿⠋⠁⣿⠟⣿⣿⢿⣧⣤⣴⣿⡇⠀")
+print(YELLOW +"⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠘⠁⢸⠟⢻⣿⡿⠀⠀")
+print(YELLOW +"⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣇⢀⣤⠀⠀⠀⠀⠘⣿⠃⠀⠀")
+print(YELLOW +"⠀⠀⠀⠀⠀⢈⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣿⢀⣴⣾⠇⠀⠀⠀")
+print(YELLOW +"⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀")
+print(YELLOW +"⠀⠀⠉⠉⠉⠉⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀")
+print(YELLOW +"⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀")
+print(YELLOW +"⠀⠀⣴⡾⠿⠿⠿⠛⠋⠉⠀⢸⣿⣿⣿⣿⠿⠋⢸⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀")
+print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠟⠋⠁⠀⠀⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")
+print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" + RESET)
+
 
 
 # Living room battle
@@ -232,7 +294,7 @@ while ghost_health > 0:
     print_with_delay(RESET + "Choose your action:")
     print_with_delay("1. Attack with a sword")
     print_with_delay("2. Attack with a gun")
-
+    time.sleep(0.5)
     choice = input("Enter your choice (1 or 2)" + GREEN + " :> " + RESET)
     if choice == "1":
         attack_with_weapon(
@@ -242,6 +304,23 @@ while ghost_health > 0:
             LIGHT_RED + "{} unleash the gun on the ghost".format(player_name), 10)
     else:
         print_with_delay(LIGHT_GRAY + "Invalid choice. Please try again.")
+    if player_health <= 0:
+        print_with_delay(
+            "The ghost overwhelms you, and you succumb to its haunting presence.")
+        print_with_delay(
+            "Game Over! You have to restart your adventure from the beginning.")
+        print("")
+        print_with_delay(RED +     "██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗") 
+        print_with_delay(RED +    "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗")
+        print_with_delay(RED +    "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝")
+        print_with_delay(RED +    "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗")
+        print_with_delay(RED +    "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║")
+        print_with_delay(RED +     "╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝")
+        print_with_delay(YELLOW +                          "CREATED BY: TEAM ONE")
+        print_with_delay(YELLOW +            "ADEOLA, BRADLEY, FAZAL, PAYIKENE, MAZIAR, ZAMIR")
+        print_with_delay(YELLOW +                              "THANK YOU" + RESET)    
+
+        exit()
 
     if ghost_health <= 0:
         print_with_delay(
@@ -288,6 +367,22 @@ print_with_delay("You use the " + BLUE + "blue key " + RESET +
 print_with_delay("A stronger" + LIGHT_WHITE + ITALIC + "ghost" +
                  RESET + "lurks inside with a formidable health pool of 50.")
 
+print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀")
+print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀")
+print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣆⠀⠀")
+print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⠁⠀⠿⢿⣿⡿⣿⣿⡆⠀")
+print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦⣤⣴⣿⠃⠀⠿⣿⡇⠀")
+print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⡿⠋⠁⣿⠟⣿⣿⢿⣧⣤⣴⣿⡇⠀")
+print(BLUE +"⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠘⠁⢸⠟⢻⣿⡿⠀⠀")
+print(BLUE +"⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣇⢀⣤⠀⠀⠀⠀⠘⣿⠃⠀⠀")
+print(BLUE +"⠀⠀⠀⠀⠀⢈⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣿⢀⣴⣾⠇⠀⠀⠀")
+print(BLUE +"⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀")
+print(BLUE +"⠀⠀⠉⠉⠉⠉⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀")
+print(BLUE +"⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀")
+print(BLUE +"⠀⠀⣴⡾⠿⠿⠿⠛⠋⠉⠀⢸⣿⣿⣿⣿⠿⠋⢸⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀")
+print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠟⠋⠁⠀⠀⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")
+print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" + RESET)
+
 # Bathroom battle
 
 print_with_delay(
@@ -299,7 +394,7 @@ while ghost_health > 0:
     print_with_delay(RESET + "Choose your action:")
     print_with_delay("1. Attack with a sword")
     print_with_delay("2. Attack with a gun")
-
+    time.sleep(0.5)
     choice = input("Enter your choice (1 or 2)" + GREEN + " :> " + RESET)
     if choice == "1":
         attack_with_weapon(
@@ -309,6 +404,24 @@ while ghost_health > 0:
             LIGHT_RED + "{} unleash the gun on the ghost".format(player_name), 10)
     else:
         print_with_delay(LIGHT_GRAY + "Invalid choice. Please try again.")
+
+    if player_health <= 0:
+        print_with_delay(
+            "The ghost overwhelms you, and you succumb to its haunting presence.")
+        print_with_delay(
+            "Game Over! You have to restart your adventure from the beginning.")
+        print("")
+        print_with_delay(RED +     "██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗") 
+        print_with_delay(RED +    "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗")
+        print_with_delay(RED +    "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝")
+        print_with_delay(RED +    "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗")
+        print_with_delay(RED +    "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║")
+        print_with_delay(RED +     "╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝")
+        print_with_delay(YELLOW +                          "CREATED BY: TEAM ONE")
+        print_with_delay(YELLOW +            "ADEOLA, BRADLEY, FAZAL, PAYIKENE, MAZIAR, ZAMIR")
+        print_with_delay(YELLOW +                              "THANK YOU" + RESET)    
+
+        exit()
 
     if ghost_health <= 0:
         print_with_delay(LIGHT_GREEN + ITALIC +
@@ -334,6 +447,22 @@ if open_door.lower() == "open":
     print_with_delay(
         "You can now breathe a sigh of relief as the game comes to an end.")
     print_with_delay("Congratulations on your escape!")
+    print("")
+    print_with_delay("░█████╗░░█████╗░███╗░░██╗░██████╗░██████╗░░█████╗░████████╗██╗░░░██╗██╗░░░░░░█████╗░████████╗██╗░█████╗░███╗░░██╗██╗░██████╗██╗")
+    print_with_delay("██╔══██╗██╔══██╗████╗░██║██╔════╝░██╔══██╗██╔══██╗╚══██╔══╝██║░░░██║██║░░░░░██╔══██╗╚══██╔══╝██║██╔══██╗████╗░██║╚█║██╔════╝██║")
+    print_with_delay("██║░░╚═╝██║░░██║██╔██╗██║██║░░██╗░██████╔╝███████║░░░██║░░░██║░░░██║██║░░░░░███████║░░░██║░░░██║██║░░██║██╔██╗██║░╚╝╚█████╗░██║")
+    print_with_delay("██║░░██╗██║░░██║██║╚████║██║░░╚██╗██╔══██╗██╔══██║░░░██║░░░██║░░░██║██║░░░░░██╔══██║░░░██║░░░██║██║░░██║██║╚████║░░░░╚═══██╗╚═╝")
+    print_with_delay("╚█████╔╝╚█████╔╝██║░╚███║╚██████╔╝██║░░██║██║░░██║░░░██║░░░╚██████╔╝███████╗██║░░██║░░░██║░░░██║╚█████╔╝██║░╚███║░░░██████╔╝██╗")
+    print_with_delay("░╚════╝░░╚════╝░╚═╝░░╚══╝░╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░░╚═════╝░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝░░░╚═════╝░╚═╝")
+    print("")
+    print_with_delay("██╗░░░██╗░█████╗░██╗░░░██╗  ███████╗░██████╗░█████╗░░█████╗░██████╗░███████╗██████╗░  ██╗")
+    print_with_delay("╚██╗░██╔╝██╔══██╗██║░░░██║  ██╔════╝██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗  ██║")
+    print_with_delay("░╚████╔╝░██║░░██║██║░░░██║  █████╗░░╚█████╗░██║░░╚═╝███████║██████╔╝█████╗░░██║░░██║  ██║")
+    print_with_delay("░░╚██╔╝░░██║░░██║██║░░░██║  ██╔══╝░░░╚═══██╗██║░░██╗██╔══██║██╔═══╝░██╔══╝░░██║░░██║  ╚═╝")
+    print_with_delay("░░░██║░░░╚█████╔╝╚██████╔╝  ███████╗██████╔╝╚█████╔╝██║░░██║██║░░░░░███████╗██████╔╝  ██╗")
+    print_with_delay("░░░╚═╝░░░░╚════╝░░╚═════╝░  ╚══════╝╚═════╝░░╚════╝░╚═╝░░╚═╝╚═╝░░░░░╚══════╝╚═════╝░  ╚═╝")
+
+
 else:
     print_with_delay(YELLOW + BOLD + UNDERLINE +
                      "You hesitate to open the door and remain trapped in the haunting house.")
