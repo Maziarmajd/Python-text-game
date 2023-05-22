@@ -2,7 +2,9 @@
 
 import time
 import random
+from playsound import playsound
 
+# Sound imports
 
 
 # Global Variables
@@ -32,6 +34,8 @@ RESET = '\033[0m'
 # Global functions
 
 #
+
+
 def print_with_delay(text):
     for character in text:
         print(character, end='', flush=True)
@@ -46,39 +50,45 @@ def attack_with_weapon(weapon, damage):
     if ghost_health > 0:
         ghost_attack = random.randint(1, 20)
         player_health -= ghost_attack
+        playsound("Sounds/ghostattacks.mp3")
     else:
         ghost_attack = 0
     time.sleep(0.1)
     print_with_delay("{}, dealing {} points of damage.".format(weapon, damage))
     time.sleep(0.7)
-    print_with_delay(
-        "The ghost attacked you for {} points of damage.".format(ghost_attack))
-    time.sleep(0.7)
+
 
 # healing package
+
 
 def heal_player():
     # Restores player's health with a random value between 1 and 30
     global player_health
     health_package = random.randint(1, 30)
     player_health += health_package
+    playsound("Sounds/health.mp3")
     print_with_delay(
-        "You find a health package in the treasure chest and gain {} health points.".format(health_package))
+        "You search an old looking treasure chest that has strange markings on it. Inside it there are medical supplies. You use them and gain {} health points".format(health_package))
 
 
-# Text image (if needed)
+playsound("Sounds/intro.mp3", block=False)
 
 # Intro (Adeola)------------------------------------------------------------------------------------------
-print(RED + "▓█████  ███▄    █  ▄████▄   ██▓     ▒█████    ██████ ▓█████ ▓█████▄      ██████  ██▓███   ▄▄▄       ▄████▄  ▓█████") 
-print(RED + "▓█   ▀  ██ ▀█   █ ▒██▀ ▀█  ▓██▒    ▒██▒  ██▒▒██    ▒ ▓█   ▀ ▒██▀ ██▌   ▒██    ▒ ▓██░  ██▒▒████▄    ▒██▀ ▀█  ▓█   ▀") 
-print(RED + "▒███   ▓██  ▀█ ██▒▒▓█    ▄ ▒██░    ▒██░  ██▒░ ▓██▄   ▒███   ░██   █▌   ░ ▓██▄   ▓██░ ██▓▒▒██  ▀█▄  ▒▓█    ▄ ▒███")   
-print(RED + "▒▓█  ▄ ▓██▒  ▐▌██▒▒▓▓▄ ▄██▒▒██░    ▒██   ██░  ▒   ██▒▒▓█  ▄ ░▓█▄   ▌     ▒   ██▒▒██▄█▓▒ ▒░██▄▄▄▄██ ▒▓▓▄ ▄██▒▒▓█  ▄") 
+
+print_with_delay(
+    "--------------------------------------- TEAM ONE PRESENTS: -----------------------------------------------------------------")
+print_with_delay(
+    "----------------------------------------------------------------------------------------------------------------------------")
+print("")
+print(RED + "▓█████  ███▄    █  ▄████▄   ██▓     ▒█████    ██████ ▓█████ ▓█████▄      ██████  ██▓███   ▄▄▄       ▄████▄  ▓█████")
+print(RED + "▓█   ▀  ██ ▀█   █ ▒██▀ ▀█  ▓██▒    ▒██▒  ██▒▒██    ▒ ▓█   ▀ ▒██▀ ██▌   ▒██    ▒ ▓██░  ██▒▒████▄    ▒██▀ ▀█  ▓█   ▀")
+print(RED + "▒███   ▓██  ▀█ ██▒▒▓█    ▄ ▒██░    ▒██░  ██▒░ ▓██▄   ▒███   ░██   █▌   ░ ▓██▄   ▓██░ ██▓▒▒██  ▀█▄  ▒▓█    ▄ ▒███")
+print(RED + "▒▓█  ▄ ▓██▒  ▐▌██▒▒▓▓▄ ▄██▒▒██░    ▒██   ██░  ▒   ██▒▒▓█  ▄ ░▓█▄   ▌     ▒   ██▒▒██▄█▓▒ ▒░██▄▄▄▄██ ▒▓▓▄ ▄██▒▒▓█  ▄")
 print(RED + "░▒████▒▒██░   ▓██░▒ ▓███▀ ░░██████▒░ ████▓▒░▒██████▒▒░▒████▒░▒████▓    ▒██████▒▒▒██▒ ░  ░ ▓█   ▓██▒▒ ▓███▀ ░░▒████▒")
 print(RED + "░░ ▒░ ░░ ▒░   ▒ ▒ ░ ░▒ ▒  ░░ ▒░▓  ░░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░░░ ▒░ ░ ▒▒▓  ▒    ▒ ▒▓▒ ▒ ░▒▓▒░ ░  ░ ▒▒   ▓▒█░░ ░▒ ▒  ░░░ ▒░ ░")
 print(RED + " ░ ░  ░░ ░░   ░ ▒░  ░  ▒   ░ ░ ▒  ░  ░ ▒ ▒░ ░ ░▒  ░ ░ ░ ░  ░ ░ ▒  ▒    ░ ░▒  ░ ░░▒ ░       ▒   ▒▒ ░  ░  ▒    ░ ░  ░")
 print(RED + "   ░      ░   ░ ░ ░          ░ ░   ░ ░ ░ ▒  ░  ░  ░     ░    ░ ░  ░    ░  ░  ░  ░░         ░   ▒   ░           ░   ")
 print(RED + "   ░  ░         ░ ░ ░          ░  ░    ░ ░        ░     ░  ░   ░             ░                 ░  ░░ ░         ░  ░")
-
 
 
 print("" + RESET)
@@ -96,7 +106,7 @@ print_with_delay("      ⠀⠀⣴⡾⠿⠿⠿⠛⠋⠉⠀⢸⣿⣿⣿⣿⠿⠋�
 print_with_delay("      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠟⠋⠁⠀⠀⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀              ")
 
 print("")
-
+playsound("Sounds/ghostIntro.mp3")
 
 player_name = input("what is your name " + GREEN + ":> " + RESET)
 print_with_delay(LIGHT_CYAN + BOLD + "{}".format(player_name) +
@@ -108,16 +118,19 @@ print_with_delay(LIGHT_CYAN + BOLD + "{}".format(player_name) +
 # wake up instructions
 
 input("Press enter to wake up" + GREEN + ":> " + RESET)
+
+
 print_with_delay(
-    "You wake up in a dimly lit bedroom, disoriented and with no memory of the day be")
+    "You wake up in a daze, in a dimly lit bedroom, you can’t remember a thing about the day before but have an overwhelming sense of dread ")
 print_with_delay(
     "As you try to collect your thoughts, you hear eerie noises echoing through the house.")
+playsound("Sounds/distantghosts.mp3", block=False)
 print_with_delay(
-    "A sudden realization hits you - you are injured and in need of medical supplies.")
+    "You look down and see blood on the side of your torso and that your leg is bruised in an odd pattern that looks almost like a skull? Who or what could have done this? What do they want with you? ")
 print_with_delay(
     "Determined to uncover the truth, you must find a way out of this haunting nightmare.")
 
-
+playsound("Sounds/suspense.mp3", block=False)
 input("Press enter to get up" + GREEN + ":> " + RESET)
 print_with_delay(LIGHT_CYAN + BOLD + "{}".format(player_name) +
                  RESET + ",you need to find out about your health.")
@@ -130,15 +143,19 @@ print_with_delay(RESET + "You find a " + BOLD + RED + "RED KEY" +
 # Inspect the note
 
 input("Press enter to read the note" + GREEN + ":> " + RESET)
+playsound("Sounds/note.mp3", block=False)
 print_with_delay(UNDERLINE + ITALIC + YELLOW +
-                 "You are in a haunted house, you must find a way to escape" + RESET)
+                 "Whoever reads this note. This house was once my family home, but has been overtaken by spiritual forces beyond our understanding or control. They are ghosts. I was hesitant to accept that myself. You must find a way to escape this place before you too are victim to them- There are keys to every room but only one opens the front door. I am leaving this note in case anyone finds it. I know not whether I will make it out. – Dated 1700… " + RESET)
 # inspect the key
 input("Press enter to inspect the key" + GREEN + ":> " + RESET)
+playsound("Sounds/key.mp3", block=False)
 print_with_delay(UNDERLINE + "The " + BOLD + RED + UNDERLINE +
                  "key" + RESET + UNDERLINE + " opens the kitchen door" + RESET)
-
-print_with_delay("You leave the bedroom and enter to the corridor")
-print_with_delay("You can see there are 3 doors")
+print_with_delay("")
+playsound("Sounds/door1.mp3", block=False)
+print_with_delay(
+    "You decide you have to leave the bedroom and go into the corridor ")
+print_with_delay("Your vision is slightly fuzzy but you can see 3 doors  ")
 
 # Corridor0 (Zamir)----------------------------------------------------------------------------------------
 
@@ -147,6 +164,7 @@ corridor_choice = input("Choose " + RED + "RED, " + YELLOW +
 
 while corridor_choice.lower() != "red":
     if corridor_choice.lower() == "yellow" or corridor_choice.lower() == "blue":
+        playsound("Sounds/lock door.mp3")
         print_with_delay(PURPLE + "This door is locked" + RESET)
         corridor_choice = input(
             "Please choose another door" + GREEN + " :> " + RESET)
@@ -154,39 +172,39 @@ while corridor_choice.lower() != "red":
         print_with_delay(BLACK + BOLD + "Choose wisely" + RESET)
         corridor_choice = input("Choose " + RED + "red, " + YELLOW +
                                 "yellow " + BLUE + "or blue door" + GREEN + " :> " + RESET)
-
+playsound("Sounds/unlockthedoor.mp3")
 print_with_delay(LIGHT_GREEN + "You use " + RED + "red key" + LIGHT_GREEN +
                  " to unlock the Kitchen door and enter the room." + RESET)
-
-
+playsound("Sounds/door.mp3")
 # Kitchen (Brad) --------------------------------------------------------------------------------------------
 
 ghost_health = 15
 
+
 print_with_delay("A" + LIGHT_WHITE + ITALIC + " ghost" +
                  RESET + " is waiting for you inside.")
-
-print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀")
-print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀")
-print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣆⠀⠀")
-print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⠁⠀⠿⢿⣿⡿⣿⣿⡆⠀")
-print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦⣤⣴⣿⠃⠀⠿⣿⡇⠀")
-print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⡿⠋⠁⣿⠟⣿⣿⢿⣧⣤⣴⣿⡇⠀")
-print(RED +"⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠘⠁⢸⠟⢻⣿⡿⠀⠀")
-print(RED +"⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣇⢀⣤⠀⠀⠀⠀⠘⣿⠃⠀⠀")
-print(RED +"⠀⠀⠀⠀⠀⢈⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣿⢀⣴⣾⠇⠀⠀⠀")
-print(RED +"⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀")
-print(RED +"⠀⠀⠉⠉⠉⠉⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀")
-print(RED +"⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀")
-print(RED +"⠀⠀⣴⡾⠿⠿⠿⠛⠋⠉⠀⢸⣿⣿⣿⣿⠿⠋⢸⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀")
-print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠟⠋⠁⠀⠀⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")
-print(RED +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" + RESET)
+playsound("Sounds/ghost1.mp3", block=False)
+print(RED + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀")
+print(RED + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀")
+print(RED + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣆⠀⠀")
+print(RED + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⠁⠀⠿⢿⣿⡿⣿⣿⡆⠀")
+print(RED + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦⣤⣴⣿⠃⠀⠿⣿⡇⠀")
+print(RED + "⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⡿⠋⠁⣿⠟⣿⣿⢿⣧⣤⣴⣿⡇⠀")
+print(RED + "⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠘⠁⢸⠟⢻⣿⡿⠀⠀")
+print(RED + "⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣇⢀⣤⠀⠀⠀⠀⠘⣿⠃⠀⠀")
+print(RED + "⠀⠀⠀⠀⠀⢈⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣿⢀⣴⣾⠇⠀⠀⠀")
+print(RED + "⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀")
+print(RED + "⠀⠀⠉⠉⠉⠉⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀")
+print(RED + "⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀")
+print(RED + "⠀⠀⣴⡾⠿⠿⠿⠛⠋⠉⠀⢸⣿⣿⣿⣿⠿⠋⢸⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀")
+print(RED + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠟⠋⠁⠀⠀⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")
+print(RED + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" + RESET)
 
 
 # kitchen battle
 
 print_with_delay(
-    "You see a sword and a gun on the table, you use them to attack the ghost")
+    "You have the sword and the gun to hand. Use them to attack the ghost ")
 
 while ghost_health > 0:
     print_with_delay(GREEN + BOLD + "Your health: {}".format(player_health))
@@ -199,9 +217,11 @@ while ghost_health > 0:
     if choice == "1":
         attack_with_weapon(
             LIGHT_RED + "{} strike the ghost with your sword".format(player_name), 5)
+        playsound("Sounds/sword.mp3")
     elif choice == "2":
         attack_with_weapon(
             LIGHT_RED + "{} unleash the gun on the ghost".format(player_name), 10)
+        playsound("Sounds/gun.mp3")
     else:
         print_with_delay(LIGHT_GRAY + "Invalid choice. Please try again.")
 
@@ -210,16 +230,24 @@ while ghost_health > 0:
             "The ghost overwhelms you, and you succumb to its haunting presence.")
         print_with_delay(
             "Game Over! You have to restart your adventure from the beginning.")
+        playsound("Sounds/ghostlaugh1.mp3", block=False)
         print("")
-        print_with_delay(RED +     "██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗") 
-        print_with_delay(RED +    "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗")
-        print_with_delay(RED +    "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝")
-        print_with_delay(RED +    "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗")
-        print_with_delay(RED +    "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║")
-        print_with_delay(RED +     "╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝")
-        print_with_delay(YELLOW +                          "CREATED BY: TEAM ONE")
-        print_with_delay(YELLOW +            "ADEOLA, BRADLEY, FAZAL, PAYIKENE, MAZIAR, ZAMIR")
-        print_with_delay(YELLOW +                              "THANK YOU" + RESET)    
+        print_with_delay(
+            RED + "██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗")
+        print_with_delay(
+            RED + "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗")
+        print_with_delay(
+            RED + "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝")
+        print_with_delay(
+            RED + "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗")
+        print_with_delay(
+            RED + "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║")
+        print_with_delay(
+            RED + "╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝")
+        print_with_delay(YELLOW + "CREATED BY: TEAM ONE")
+        print_with_delay(
+            YELLOW + "ADEOLA, BRADLEY, FAZAL, PAYIKENE, MAZIAR, ZAMIR")
+        print_with_delay(YELLOW + "THANK YOU" + RESET)
 
         exit()
 
@@ -230,10 +258,14 @@ while ghost_health > 0:
         print_with_delay("You find a " + YELLOW + BOLD +
                          "YELLOW KEY " + LIGHT_GREEN + "and a health source" + RESET)
         heal_player()  # Executes the heal_player() function
-        print_with_delay(LIGHT_PURPLE + "Your health is increased to {}".format(player_health))
-        print_with_delay("You have successfully vanquished the ghost and restored your health.")
-        print_with_delay("You decide to leave the kitchen and continue your exploration.")
-        print_with_delay("You make your way back to the corridor, ready to face whatever awaits you in your quest." + RESET)
+        print_with_delay(
+            LIGHT_PURPLE + "Your health is increased to {}".format(player_health))
+        print_with_delay(
+            "You have successfully vanquished the ghost and restored your health.")
+        print_with_delay(
+            "You have a bad feeling that the ghosts will only get harder to kill as the night goes on ")
+        print_with_delay(
+            "You make your way back to the corridor, ready to face whatever awaits you in your quest." + RESET)
 
 # Corridor1 (Zamir)----------------------------------------------------------------------------------------
 
@@ -247,6 +279,7 @@ while corridor_choice.lower() != "yellow":
         corridor_choice = input(
             "Please choose another door" + GREEN + " :> " + RESET)
     elif corridor_choice.lower() == "blue":
+        playsound("Sounds/lock door.mp3")
         print_with_delay(PURPLE + "The door is locked" + RESET)
         corridor_choice = input(
             "Please choose another door" + GREEN + " :> " + RESET)
@@ -259,28 +292,30 @@ while corridor_choice.lower() != "yellow":
 # Living room (Maz) --------------------------------------------------------------------------------------------
 
 ghost_health = 25
-
+playsound("Sounds/unlockthedoor.mp3")
 print_with_delay(LIGHT_GREEN + "You use the " + YELLOW + "yellow key " +
                  LIGHT_GREEN + "to unlock the Living room door and enter the room.")
+playsound("Sounds/door.mp3")
+
 print_with_delay("Another " + LIGHT_WHITE + ITALIC + "ghost" +
                  LIGHT_GREEN + " awaits you, stronger than be" + RESET)
+playsound("Sounds/ghost2.mp3", block=False)
 
-print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀")
-print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀")
-print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣆⠀⠀")
-print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⠁⠀⠿⢿⣿⡿⣿⣿⡆⠀")
-print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦⣤⣴⣿⠃⠀⠿⣿⡇⠀")
-print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⡿⠋⠁⣿⠟⣿⣿⢿⣧⣤⣴⣿⡇⠀")
-print(YELLOW +"⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠘⠁⢸⠟⢻⣿⡿⠀⠀")
-print(YELLOW +"⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣇⢀⣤⠀⠀⠀⠀⠘⣿⠃⠀⠀")
-print(YELLOW +"⠀⠀⠀⠀⠀⢈⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣿⢀⣴⣾⠇⠀⠀⠀")
-print(YELLOW +"⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀")
-print(YELLOW +"⠀⠀⠉⠉⠉⠉⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀")
-print(YELLOW +"⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀")
-print(YELLOW +"⠀⠀⣴⡾⠿⠿⠿⠛⠋⠉⠀⢸⣿⣿⣿⣿⠿⠋⢸⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀")
-print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠟⠋⠁⠀⠀⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")
-print(YELLOW +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" + RESET)
-
+print(YELLOW + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀")
+print(YELLOW + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀")
+print(YELLOW + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣆⠀⠀")
+print(YELLOW + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⠁⠀⠿⢿⣿⡿⣿⣿⡆⠀")
+print(YELLOW + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦⣤⣴⣿⠃⠀⠿⣿⡇⠀")
+print(YELLOW + "⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⡿⠋⠁⣿⠟⣿⣿⢿⣧⣤⣴⣿⡇⠀")
+print(YELLOW + "⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠘⠁⢸⠟⢻⣿⡿⠀⠀")
+print(YELLOW + "⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣇⢀⣤⠀⠀⠀⠀⠘⣿⠃⠀⠀")
+print(YELLOW + "⠀⠀⠀⠀⠀⢈⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣿⢀⣴⣾⠇⠀⠀⠀")
+print(YELLOW + "⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀")
+print(YELLOW + "⠀⠀⠉⠉⠉⠉⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀")
+print(YELLOW + "⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀")
+print(YELLOW + "⠀⠀⣴⡾⠿⠿⠿⠛⠋⠉⠀⢸⣿⣿⣿⣿⠿⠋⢸⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀")
+print(YELLOW + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠟⠋⠁⠀⠀⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")
+print(YELLOW + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" + RESET)
 
 
 # Living room battle
@@ -299,9 +334,11 @@ while ghost_health > 0:
     if choice == "1":
         attack_with_weapon(
             LIGHT_RED + "{} strike the ghost with your sword".format(player_name), 5)
+        playsound("Sounds/sword.mp3")
     elif choice == "2":
         attack_with_weapon(
             LIGHT_RED + "{} unleash the gun on the ghost".format(player_name), 10)
+        playsound("Sounds/gun.mp3")
     else:
         print_with_delay(LIGHT_GRAY + "Invalid choice. Please try again.")
     if player_health <= 0:
@@ -309,16 +346,24 @@ while ghost_health > 0:
             "The ghost overwhelms you, and you succumb to its haunting presence.")
         print_with_delay(
             "Game Over! You have to restart your adventure from the beginning.")
+        playsound("Sounds/ghostlaugh2.mp3")
         print("")
-        print_with_delay(RED +     "██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗") 
-        print_with_delay(RED +    "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗")
-        print_with_delay(RED +    "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝")
-        print_with_delay(RED +    "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗")
-        print_with_delay(RED +    "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║")
-        print_with_delay(RED +     "╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝")
-        print_with_delay(YELLOW +                          "CREATED BY: TEAM ONE")
-        print_with_delay(YELLOW +            "ADEOLA, BRADLEY, FAZAL, PAYIKENE, MAZIAR, ZAMIR")
-        print_with_delay(YELLOW +                              "THANK YOU" + RESET)    
+        print_with_delay(
+            RED + "██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗")
+        print_with_delay(
+            RED + "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗")
+        print_with_delay(
+            RED + "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝")
+        print_with_delay(
+            RED + "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗")
+        print_with_delay(
+            RED + "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║")
+        print_with_delay(
+            RED + "╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝")
+        print_with_delay(YELLOW + "CREATED BY: TEAM ONE")
+        print_with_delay(
+            YELLOW + "ADEOLA, BRADLEY, FAZAL, PAYIKENE, MAZIAR, ZAMIR")
+        print_with_delay(YELLOW + "THANK YOU" + RESET)
 
         exit()
 
@@ -331,7 +376,7 @@ while ghost_health > 0:
         heal_player()  # Executes the heal_player() function
 print("You have {} health".format(player_health))
 print_with_delay(
-    LIGHT_PURPLE + "You have successfully vanquished the ghost and restored your health.")
+    LIGHT_PURPLE + "The ghost is defeated. Your health is restored. You think it might be adrenaline but you don’t care ")
 print_with_delay(
     "You decide to leave the living room and continue your exploration.")
 print_with_delay(
@@ -355,38 +400,39 @@ while corridor_choice.lower() != "blue":
                                 "YELLOW " + BLUE + "or BLUE door" + GREEN + " :> " + RESET)
 
 print_with_delay("The bathroom door is open and you can enter")
-print_with_delay("You enter the bathroom")
 
 
 # Bathroom (Faz) --------------------------------------------------------------------------------------------
 
 ghost_health = 45
-
+playsound("Sounds/unlockthedoor.mp3")
 print_with_delay("You use the " + BLUE + "blue key " + RESET +
                  "to unlock the Bathroom door and enter the room.")
+playsound("Sounds/door.mp3")
 print_with_delay("A stronger" + LIGHT_WHITE + ITALIC + "ghost" +
-                 RESET + "lurks inside with a formidable health pool of 50.")
+                 RESET + "lurks insid. You are frightened and frustrated that this ghost is stronger still having barely escaped last time. You decide to fight it anyway  ")
+playsound("Sounds/ghost3.mp3", block=False)
 
-print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀")
-print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀")
-print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣆⠀⠀")
-print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⠁⠀⠿⢿⣿⡿⣿⣿⡆⠀")
-print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦⣤⣴⣿⠃⠀⠿⣿⡇⠀")
-print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⡿⠋⠁⣿⠟⣿⣿⢿⣧⣤⣴⣿⡇⠀")
-print(BLUE +"⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠘⠁⢸⠟⢻⣿⡿⠀⠀")
-print(BLUE +"⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣇⢀⣤⠀⠀⠀⠀⠘⣿⠃⠀⠀")
-print(BLUE +"⠀⠀⠀⠀⠀⢈⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣿⢀⣴⣾⠇⠀⠀⠀")
-print(BLUE +"⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀")
-print(BLUE +"⠀⠀⠉⠉⠉⠉⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀")
-print(BLUE +"⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀")
-print(BLUE +"⠀⠀⣴⡾⠿⠿⠿⠛⠋⠉⠀⢸⣿⣿⣿⣿⠿⠋⢸⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀")
-print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠟⠋⠁⠀⠀⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")
-print(BLUE +"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" + RESET)
+print(BLUE + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀")
+print(BLUE + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀")
+print(BLUE + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣆⠀⠀")
+print(BLUE + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⠁⠀⠿⢿⣿⡿⣿⣿⡆⠀")
+print(BLUE + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦⣤⣴⣿⠃⠀⠿⣿⡇⠀")
+print(BLUE + "⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⡿⠋⠁⣿⠟⣿⣿⢿⣧⣤⣴⣿⡇⠀")
+print(BLUE + "⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠘⠁⢸⠟⢻⣿⡿⠀⠀")
+print(BLUE + "⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣇⢀⣤⠀⠀⠀⠀⠘⣿⠃⠀⠀")
+print(BLUE + "⠀⠀⠀⠀⠀⢈⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣿⢀⣴⣾⠇⠀⠀⠀")
+print(BLUE + "⠀⠀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀")
+print(BLUE + "⠀⠀⠉⠉⠉⠉⣡⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀")
+print(BLUE + "⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀")
+print(BLUE + "⠀⠀⣴⡾⠿⠿⠿⠛⠋⠉⠀⢸⣿⣿⣿⣿⠿⠋⢸⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀")
+print(BLUE + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠟⠋⠁⠀⠀⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀")
+print(BLUE + "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" + RESET)
 
 # Bathroom battle
 
 print_with_delay(
-    "You see a sword and a gun on the table, you use them to attack the ghost")
+    "There is another sword and gun at your feet. You are relieved. You launch yourself at the ghost and fight it. ")
 
 while ghost_health > 0:
     print_with_delay(GREEN + "Your health: {}".format(player_health))
@@ -399,9 +445,11 @@ while ghost_health > 0:
     if choice == "1":
         attack_with_weapon(
             LIGHT_RED + "{} strike the ghost with your sword".format(player_name), 5)
+        playsound("Sounds/sword.mp3")
     elif choice == "2":
         attack_with_weapon(
             LIGHT_RED + "{} unleash the gun on the ghost".format(player_name), 10)
+        playsound("Sounds/gun.mp3")
     else:
         print_with_delay(LIGHT_GRAY + "Invalid choice. Please try again.")
 
@@ -410,16 +458,24 @@ while ghost_health > 0:
             "The ghost overwhelms you, and you succumb to its haunting presence.")
         print_with_delay(
             "Game Over! You have to restart your adventure from the beginning.")
+        playsound("Sounds/ghostlaugh3.mp3", block=False)
         print("")
-        print_with_delay(RED +     "██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗") 
-        print_with_delay(RED +    "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗")
-        print_with_delay(RED +    "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝")
-        print_with_delay(RED +    "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗")
-        print_with_delay(RED +    "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║")
-        print_with_delay(RED +     "╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝")
-        print_with_delay(YELLOW +                          "CREATED BY: TEAM ONE")
-        print_with_delay(YELLOW +            "ADEOLA, BRADLEY, FAZAL, PAYIKENE, MAZIAR, ZAMIR")
-        print_with_delay(YELLOW +                              "THANK YOU" + RESET)    
+        print_with_delay(
+            RED + "██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗")
+        print_with_delay(
+            RED + "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗")
+        print_with_delay(
+            RED + "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝")
+        print_with_delay(
+            RED + "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗")
+        print_with_delay(
+            RED + "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║")
+        print_with_delay(
+            RED + "╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝")
+        print_with_delay(YELLOW + "CREATED BY: TEAM ONE")
+        print_with_delay(
+            YELLOW + "ADEOLA, BRADLEY, FAZAL, PAYIKENE, MAZIAR, ZAMIR")
+        print_with_delay(YELLOW + "THANK YOU" + RESET)
 
         exit()
 
@@ -443,27 +499,63 @@ print_with_delay(
 open_door = input("Type 'OPEN'" + GREEN + " :> " + RESET)
 
 if open_door.lower() == "open":
+    playsound("Sounds/unlockthedoor.mp3")
     print_with_delay(GREEN + BOLD + UNDERLINE + "You unlock the front door.")
+    playsound("Sounds/Finaldoor.mp3")
     print_with_delay(
         "You can now breathe a sigh of relief as the game comes to an end.")
     print_with_delay("Congratulations on your escape!")
+    playsound("Sounds/the end.mp3", block=False)
     print("")
-    print_with_delay("░█████╗░░█████╗░███╗░░██╗░██████╗░██████╗░░█████╗░████████╗██╗░░░██╗██╗░░░░░░█████╗░████████╗██╗░█████╗░███╗░░██╗██╗░██████╗██╗")
-    print_with_delay("██╔══██╗██╔══██╗████╗░██║██╔════╝░██╔══██╗██╔══██╗╚══██╔══╝██║░░░██║██║░░░░░██╔══██╗╚══██╔══╝██║██╔══██╗████╗░██║╚█║██╔════╝██║")
-    print_with_delay("██║░░╚═╝██║░░██║██╔██╗██║██║░░██╗░██████╔╝███████║░░░██║░░░██║░░░██║██║░░░░░███████║░░░██║░░░██║██║░░██║██╔██╗██║░╚╝╚█████╗░██║")
-    print_with_delay("██║░░██╗██║░░██║██║╚████║██║░░╚██╗██╔══██╗██╔══██║░░░██║░░░██║░░░██║██║░░░░░██╔══██║░░░██║░░░██║██║░░██║██║╚████║░░░░╚═══██╗╚═╝")
-    print_with_delay("╚█████╔╝╚█████╔╝██║░╚███║╚██████╔╝██║░░██║██║░░██║░░░██║░░░╚██████╔╝███████╗██║░░██║░░░██║░░░██║╚█████╔╝██║░╚███║░░░██████╔╝██╗")
-    print_with_delay("░╚════╝░░╚════╝░╚═╝░░╚══╝░╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░░╚═════╝░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝░░░╚═════╝░╚═╝")
+    print_with_delay(
+        "░█████╗░░█████╗░███╗░░██╗░██████╗░██████╗░░█████╗░████████╗██╗░░░██╗██╗░░░░░░█████╗░████████╗██╗░█████╗░███╗░░██╗██╗░██████╗██╗")
+    print_with_delay(
+        "██╔══██╗██╔══██╗████╗░██║██╔════╝░██╔══██╗██╔══██╗╚══██╔══╝██║░░░██║██║░░░░░██╔══██╗╚══██╔══╝██║██╔══██╗████╗░██║╚█║██╔════╝██║")
+    print_with_delay(
+        "██║░░╚═╝██║░░██║██╔██╗██║██║░░██╗░██████╔╝███████║░░░██║░░░██║░░░██║██║░░░░░███████║░░░██║░░░██║██║░░██║██╔██╗██║░╚╝╚█████╗░██║")
+    print_with_delay(
+        "██║░░██╗██║░░██║██║╚████║██║░░╚██╗██╔══██╗██╔══██║░░░██║░░░██║░░░██║██║░░░░░██╔══██║░░░██║░░░██║██║░░██║██║╚████║░░░░╚═══██╗╚═╝")
+    print_with_delay(
+        "╚█████╔╝╚█████╔╝██║░╚███║╚██████╔╝██║░░██║██║░░██║░░░██║░░░╚██████╔╝███████╗██║░░██║░░░██║░░░██║╚█████╔╝██║░╚███║░░░██████╔╝██╗")
+    print_with_delay(
+        "░╚════╝░░╚════╝░╚═╝░░╚══╝░╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░░╚═════╝░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝░░░╚═════╝░╚═╝")
     print("")
-    print_with_delay("██╗░░░██╗░█████╗░██╗░░░██╗  ███████╗░██████╗░█████╗░░█████╗░██████╗░███████╗██████╗░  ██╗")
-    print_with_delay("╚██╗░██╔╝██╔══██╗██║░░░██║  ██╔════╝██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗  ██║")
-    print_with_delay("░╚████╔╝░██║░░██║██║░░░██║  █████╗░░╚█████╗░██║░░╚═╝███████║██████╔╝█████╗░░██║░░██║  ██║")
-    print_with_delay("░░╚██╔╝░░██║░░██║██║░░░██║  ██╔══╝░░░╚═══██╗██║░░██╗██╔══██║██╔═══╝░██╔══╝░░██║░░██║  ╚═╝")
-    print_with_delay("░░░██║░░░╚█████╔╝╚██████╔╝  ███████╗██████╔╝╚█████╔╝██║░░██║██║░░░░░███████╗██████╔╝  ██╗")
-    print_with_delay("░░░╚═╝░░░░╚════╝░░╚═════╝░  ╚══════╝╚═════╝░░╚════╝░╚═╝░░╚═╝╚═╝░░░░░╚══════╝╚═════╝░  ╚═╝")
-
+    print_with_delay(
+        "██╗░░░██╗░█████╗░██╗░░░██╗  ███████╗░██████╗░█████╗░░█████╗░██████╗░███████╗██████╗░  ██╗")
+    print_with_delay(
+        "╚██╗░██╔╝██╔══██╗██║░░░██║  ██╔════╝██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗  ██║")
+    print_with_delay(
+        "░╚████╔╝░██║░░██║██║░░░██║  █████╗░░╚█████╗░██║░░╚═╝███████║██████╔╝█████╗░░██║░░██║  ██║")
+    print_with_delay(
+        "░░╚██╔╝░░██║░░██║██║░░░██║  ██╔══╝░░░╚═══██╗██║░░██╗██╔══██║██╔═══╝░██╔══╝░░██║░░██║  ╚═╝")
+    print_with_delay(
+        "░░░██║░░░╚█████╔╝╚██████╔╝  ███████╗██████╔╝╚█████╔╝██║░░██║██║░░░░░███████╗██████╔╝  ██╗")
+    print_with_delay(
+        "░░░╚═╝░░░░╚════╝░░╚═════╝░  ╚══════╝╚═════╝░░╚════╝░╚═╝░░╚═╝╚═╝░░░░░╚══════╝╚═════╝░  ╚═╝")
+    print_with_delay(YELLOW + "CREATED BY: TEAM ONE")
+    print_with_delay(
+        YELLOW + "ADEOLA, BRADLEY, FAZAL, PAYIKENE, MAZIAR, ZAMIR")
+    print_with_delay(YELLOW + "THANK YOU" + RESET)
 
 else:
     print_with_delay(YELLOW + BOLD + UNDERLINE +
                      "You hesitate to open the door and remain trapped in the haunting house.")
     print_with_delay("Game Over! Your adventure ends here.")
+    playsound("Sounds/finallaugh.mp3", block=False)
+    print("")
+    print_with_delay(
+        RED + "██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗")
+    print_with_delay(
+        RED + "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗")
+    print_with_delay(
+        RED + "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝")
+    print_with_delay(
+        RED + "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗")
+    print_with_delay(
+        RED + "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║")
+    print_with_delay(
+        RED + "╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝")
+    print_with_delay(YELLOW + "CREATED BY: TEAM ONE")
+    print_with_delay(
+        YELLOW + "ADEOLA, BRADLEY, FAZAL, PAYIKENE, MAZIAR, ZAMIR")
+    print_with_delay(YELLOW + "THANK YOU" + RESET)
